@@ -1,10 +1,10 @@
 ---
-layout: post
+layout: posts
 title:  "hello world"
-date:   2015-02-10 15:14:54
+date:   2025-07-20 20:20:54
 categories: jekyll
 tags: jekyll
-excerpt: 当年创建 jekyll 时默认的一篇文章，没什么意义，我也一直没删除，留个纪念吧。
+excerpt: testing testing one two three
 mathjax: true
 ---
 
@@ -14,12 +14,9 @@ To add new posts, simply add a file in the `_posts` directory that follows the c
 
 Jekyll also offers powerful support for code snippets:
 
-```ruby
-def print_hi(name)
-  puts "Hi, #{name}"
-end
-print_hi('Tom')
-#=> prints 'Hi, Tom' to STDOUT.
+```python
+print('hello world!')
+# hello world!
 ```
 
 Check out the [Jekyll docs][jekyll] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll’s dedicated Help repository][jekyll-help].
@@ -28,7 +25,7 @@ Check out the [Jekyll docs][jekyll] for more info on how to get the most out of 
 [jekyll-gh]:   https://github.com/jekyll/jekyll
 [jekyll-help]: https://github.com/jekyll/jekyll-help
 
-Block Mathjax 
+Mathjax test
 
 $$
 f(x) = ax + b
@@ -36,3 +33,4 @@ $$
 
 Inline Mathjax $a \neq b$
 
+nice.
