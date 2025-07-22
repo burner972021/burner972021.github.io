@@ -15,7 +15,9 @@ type: page
 
 ## Research Projects
 
-* [Finite key analysis of CV-QKD under noisy environments and imperfect detectors](tbd)
+* Finite key analysis of CV-QKD under noisy environments and imperfect detectors
+    * we are also looking into possible backdoor attacks via side-channeling/leakage
+    * [Repository for simulations/all project-related scripts can be found here](https://github.com/burner972021/ph18-simulations)
 
 ## Notes
 
