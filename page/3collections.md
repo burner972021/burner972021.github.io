@@ -13,6 +13,10 @@ type: page
 
 * [QRNG-RSA generator using NetSquid](https://github.com/burner972021/qrng-rsa)
 
+## Research Projects
+
+* [Finite key analysis of CV-QKD under noisy environments and imperfect detectors](tbd)
+
 ## Notes
 
 ### Mathematics
