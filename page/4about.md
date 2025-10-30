@@ -24,6 +24,6 @@ I have always had a lot of interests and it is difficult to give attention to ea
 * email：caoxizhencaoxizhen@gmail.com
 * Linkedin: [caoxizhen](https://www.linkedin.com/in/caoxizhen/)
 
-I am always eager for an internship. 
+Currently a project intern at A*STAR IMRE.
 
 Additionally, if you have any inquiries about something on this blog, feel free to email me. :)
