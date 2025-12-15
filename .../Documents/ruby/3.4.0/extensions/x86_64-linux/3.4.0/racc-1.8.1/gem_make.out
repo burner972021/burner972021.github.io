@@ -1,0 +1,18 @@
+current directory: /home/xizhen/Documents/burner972021/burner972021.github.io/.../Documents/ruby/3.4.0/gems/racc-1.8.1/ext/racc/cparse
+/usr/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /home/xizhen/Documents/burner972021/burner972021.github.io/.../Documents/ruby/3.4.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20251207-112493-w8slfu sitelibdir\=./.gem.20251207-112493-w8slfu clean
+
+current directory: /home/xizhen/Documents/burner972021/burner972021.github.io/.../Documents/ruby/3.4.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20251207-112493-w8slfu sitelibdir\=./.gem.20251207-112493-w8slfu
+compiling cparse.c
+linking shared-object racc/cparse.so
+
+current directory: /home/xizhen/Documents/burner972021/burner972021.github.io/.../Documents/ruby/3.4.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20251207-112493-w8slfu sitelibdir\=./.gem.20251207-112493-w8slfu install
+/usr/bin/install -c -m 0755 cparse.so ./.gem.20251207-112493-w8slfu/racc
+
+current directory: /home/xizhen/Documents/burner972021/burner972021.github.io/.../Documents/ruby/3.4.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20251207-112493-w8slfu sitelibdir\=./.gem.20251207-112493-w8slfu clean
