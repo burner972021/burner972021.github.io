@@ -1,27 +1,165 @@
 <!DOCTYPE html>
-    <html class="bgimage">
-        <head>
-            <style>     
-                .bgimage {
-                    background-image: url('{{ site.baseurl }}./assets/images/backdrop.jpg');
-                    width: fit-content;
-                }
-                
-                #content {
-                    font-size: 200px;
-                    font-family: Arial, Helvetica, sans-serif;
-                    font-style: italic;
-                    font-weight: bold;
-                    color: grey;
-                    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-                }
-            </style>
-            <title>
-                {{ page.title }}
-            </title>
-            <link rel="icon" type="image/x-icon" href="./assets/images/favicon.ico">
-        </head>
-        <body id="content">
-            {{ content }}
-        </body>
-    </html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ page.title }}</title>
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico" />
+    <style>
+      :root {
+        --paper: #f7f3ea;
+        --ink: #222222;
+        --accent: #e06666;
+        --nav-bg: #f3e8ff;
+        --box-bg: #ffffff;
+        --box-border: #222222;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        font-family: "Times New Roman", serif;
+        background: url("/assets/backdrop.jpg") repeat center top;
+        min-height: 100vh;
+      }
+
+      .page {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        padding: 0 24px;
+      }
+
+      .page-inner {
+        display: grid;
+        grid-template-columns: minmax(220px, 1fr) minmax(420px, 2fr);
+        gap: 0;
+        max-width: 960px;
+        width: 100%;
+      }
+
+      .left {
+        padding: 24px 16px 48px;
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .nav-panel {
+        width: min(220px, 100%);
+        background: var(--nav-bg);
+        border: 1px solid var(--box-border);
+        padding: 12px 10px;
+        font-size: 14px;
+      }
+
+      .nav-panel h2 {
+        margin: 6px 0 8px;
+        font-size: 14px;
+        text-transform: lowercase;
+        text-align: center;
+        background: #fff4a3;
+        border: 1px solid var(--box-border);
+        padding: 2px 4px;
+      }
+
+      .nav-panel a {
+        color: #1a0dab;
+        text-decoration: underline;
+        display: block;
+        padding: 2px 0;
+      }
+
+      .main {
+        padding: 24px 12px 48px;
+      }
+
+      .content-box {
+        background: var(--box-bg);
+        border: 2px solid var(--box-border);
+        padding: 0;
+      }
+
+      .content-header {
+        background: #f7c4d2;
+        border-bottom: 2px solid var(--box-border);
+        padding: 6px 10px;
+        font-size: 14px;
+      }
+
+      .content-inner {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 0;
+      }
+
+      .content-left {
+        padding: 12px;
+        border-right: 2px solid var(--box-border);
+      }
+
+      .content-right {
+        padding: 12px;
+      }
+
+      .notice {
+        background: #e9f7ff;
+        border: 1px solid var(--box-border);
+        padding: 8px;
+        font-size: 13px;
+        margin-bottom: 10px;
+      }
+
+      @media (max-width: 900px) {
+        .page-inner {
+          grid-template-columns: 1fr;
+        }
+
+        .left {
+          justify-content: center;
+        }
+
+        .main {
+          padding: 12px 16px 32px;
+        }
+
+        .content-inner {
+          grid-template-columns: 1fr;
+        }
+
+        .content-left {
+          border-right: 0;
+          border-bottom: 2px solid var(--box-border);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="page-inner">
+        <aside class="left">
+          <nav class="nav-panel">
+            <h2>table of contents</h2>
+            <a href="#about">about</a>
+            <a href="#work">work</a>
+            <a href="#notes">notes</a>
+            <a href="#contact">contact</a>
+            <h2>main links</h2>
+            <a href="#projects">projects</a>
+            <a href="#archive">archive</a>
+            <a href="#tests">tests</a>
+            <h2>other</h2>
+            <a href="#guestbook">guestbook</a>
+            <a href="#privacy">privacy</a>
+          </nav>
+        </aside>
+        <main class="main">
+          {{ content }}
+        </main>
+      </div>
+    </div>
+  </body>
+</html>
