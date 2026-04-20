@@ -1,0 +1,27 @@
+name: Deploy preview (staging)
+on:
+  push:
+    branches: [staging]
+permissions:
+  contents: read
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.4"
+          bundler-cache: true
+      - run: bundle exec jekyll build --baseurl ""
+        env:
+          JEKYLL_ENV: staging
+      - name: Publish to preview host
+        env:
+          PREVIEW_TOKEN: ${{ secrets.PREVIEW_TOKEN }}
+        run: |
+          tar czf _site.tar.gz -C _site .
+          curl -sf -X POST "https://120279renrub.caoxizhencaoxizhen.workers.dev/_deploy" \
+            -H "X-Preview-Token: $PREVIEW_TOKEN" \
+            --data-binary @_site.tar.gz
+          echo "Preview live: https://120279renrub.caoxizhencaoxizhen.workers.dev/"
