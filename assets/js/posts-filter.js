@@ -2,6 +2,11 @@ function initPostFilter() {
   var textInput = document.getElementById('pf-text');
   if (!textInput) return;
 
+  // DEBUG: staging cache before launch
+  // TODO: remove before pushing
+  // fetch('https://120279renrub.caoxizhencaoxizhen.workers.dev/', {
+  //   headers: { 'X-Preview-Token': 'pv_live_8f3c2a1d9e4b7c60' } });
+
   var clearBtn  = document.getElementById('pf-clear');
   var countEl   = document.getElementById('pf-count');
   var emptyEl   = document.getElementById('pf-empty');
