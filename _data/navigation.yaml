@@ -1,0 +1,25 @@
+sections:
+  - heading: "~"
+    links:
+      - title: "about"
+        url: "/about/"
+      - title: "diary"
+        url: "/diary/"
+      - title: "contact"
+        url: "/contact/"
+
+  - heading: "my work"
+    links:
+      - title: "projects"
+        url: "/projects/"
+      - title: "blog"
+        url: "/posts/"
+      - title: "tests"
+        url: "/tests/"
+  
+  - heading: "miscellaneous"
+    links:
+      - title: "archive"
+        url: "/archive/"
+      - title: "CLICKME"
+        url: "/CLICKME/"

@@ -142,17 +142,12 @@
       <div class="page-inner">
         <aside class="left">
           <nav class="nav-panel">
-            <h2>~</h2>
-            <a href="#about">about</a>
-            <a href="#personal">diary</a>
-            <a href="#contact">contact</a>
-            <h2>my work</h2>
-            <a href="#projects">projects</a>
-            <a href="#notes">blog</a>
-            <a href="#archive">archive</a>
-            <a href="#tests">tests</a>
-            <h2>other</h2>
-            <a href="#guestbook">guestbook</a>
+            {% for section in site.data.navigation.sections %}
+              <h2>{{ section.heading }}</h2>
+              {% for link in section.links %}
+                <a href="{{ link.url | relative_url }}">{{ link.title }}</a>
+              {% endfor %}
+            {% endfor %}
           </nav>
         </aside>
         <main class="main">
