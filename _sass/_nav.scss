@@ -1,0 +1,34 @@
+.left {
+  padding: 24px 16px 48px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.nav-panel {
+  width: min(220px, 100%);
+  background: var(--nav-bg);
+  border: 1px solid var(--box-border);
+  padding: 12px 10px;
+  font-size: 14px;
+
+  h2 {
+    margin: 6px 0 8px;
+    font-size: 14px;
+    text-transform: lowercase;
+    text-align: center;
+    background: #fff4a3;
+    border: 1px solid var(--box-border);
+    padding: 2px 4px;
+  }
+
+  a {
+    color: #1a0dab;
+    text-decoration: underline;
+    display: block;
+    padding: 2px 0;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}

@@ -1,6 +1,8 @@
 sections:
   - heading: "~"
     links:
+      - title: "home"
+        url: "/"
       - title: "about"
         url: "/about/"
       - title: "diary"

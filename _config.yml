@@ -20,7 +20,7 @@
 
 title: burner972021
 email: caoxizhencaoxizhen@example.com
-description: >- # this means to ignore newlines until "baseurl:"
+description: >-
   Time is the cruelest force of all
 baseurl: "" # the subpath of your site, e.g. /blog
 url: 'https://burner972021.github.io'
