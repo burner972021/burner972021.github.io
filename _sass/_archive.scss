@@ -1,0 +1,47 @@
+@use "variables" as *;
+
+.archive-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.diary-entry {
+  background: $box-bg;
+  border: 2px solid $box-border;
+  margin-bottom: -2px;
+
+  summary {
+    padding: 10px 12px;
+    cursor: pointer;
+    list-style: none;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+  }
+
+  &[open] summary {
+    border-bottom: 1px solid $box-border;
+  }
+}
+
+.diary-entry-title {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.diary-entry-preview {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: #555;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.diary-entry-body {
+  padding: 10px 12px;
+  font-size: 14px;
+}

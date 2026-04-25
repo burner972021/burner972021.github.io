@@ -1,13 +1,19 @@
+@use "variables" as *;
+
 .left {
-  padding: 24px 16px 48px;
+  padding: 0;
   display: flex;
   justify-content: flex-end;
 }
 
 .nav-panel {
   width: min(220px, 100%);
-  background: var(--nav-bg);
-  border: 1px solid var(--box-border);
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  overflow-y: auto;
+  background: $nav-bg;
+  border: 1px solid $box-border;
   padding: 12px 10px;
   font-size: 14px;
 
@@ -16,8 +22,8 @@
     font-size: 14px;
     text-transform: lowercase;
     text-align: center;
-    background: #fff4a3;
-    border: 1px solid var(--box-border);
+    background: #eaff06;
+    border: 1px solid $box-border;
     padding: 2px 4px;
   }
 

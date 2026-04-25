@@ -1,0 +1,20 @@
+---
+layout: default
+---
+
+{{ content }}
+
+<div class="archive-list">
+  {% assign diary_entries = site.pages | where: "layout", "diaryentry" | sort: "path" | reverse %}
+  {% for entry in diary_entries %}
+  <details class="diary-entry">
+    <summary class="diary-entry-header">
+      <span class="diary-entry-title">{{ entry.title }}</span>
+      <p class="diary-entry-preview">{{ entry.content | strip_html | truncatewords: 25 }}</p>
+    </summary>
+    <div class="diary-entry-body">
+      {{ entry.content }}
+    </div>
+  </details>
+  {% endfor %}
+</div>
