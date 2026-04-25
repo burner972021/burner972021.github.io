@@ -8,6 +8,4 @@ drafts
 .cache
 .bundle
 ...
-Gemfile
-Gemfile.lock
 node_modules
