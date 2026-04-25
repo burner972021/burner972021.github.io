@@ -30,6 +30,7 @@ plugins:
   - jekyll-feed
   - jekyll-paginate
   - jemoji
+  - jekyll-spaceship
 
 # Exclude from processing.
 # The following items will not be processed, by default.
