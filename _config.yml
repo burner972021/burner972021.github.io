@@ -29,7 +29,6 @@ url: 'https://burner972021.github.io'
 plugins:
   - jekyll-feed
   - jekyll-paginate
-  - jekyll-spaceship
   - jemoji
 
 # Exclude from processing.
