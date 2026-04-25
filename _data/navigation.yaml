@@ -25,5 +25,5 @@ sections:
         url: "/archive/"
       - title: "sketchbook"
         url: "/sketchbook/"
-      - title: "CLICKME"
-        url: "/CLICKME/"
+      # - title: "CLICKME"
+      #   url: "/CLICKME/"
