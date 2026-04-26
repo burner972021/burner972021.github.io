@@ -6,6 +6,7 @@
     <title>{{ page.title }}</title>
     <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico" />
     <link rel="stylesheet" href="/assets/css/main.css" />
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@8/dist/turbo.es2017-esm.js"></script>
     {% if page.mathjax %}
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
     {% endif %}
@@ -25,7 +26,7 @@
             <a class="nav-clickme" style="color:rgb(227, 224, 118)" href="/CLICKME/">CLICKME</a>
           </nav>
         </aside>
-        <main class="main">
+        <main class="main{% if page.layout == 'diary' or page.url == '/' %} no-paper{% endif %}">
           {{ content }}
         </main>
       </div>

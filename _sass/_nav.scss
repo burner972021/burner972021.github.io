@@ -5,9 +5,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
-  position: sticky;
-  top: 0;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .nav-panel {
@@ -52,6 +50,8 @@
   text-decoration: underline;
   padding: 2px 0;
   font-size: 14px;
+  position: sticky;
+  bottom: 0;
 
   &:hover {
     opacity: 0.8;

@@ -34,7 +34,15 @@ body {
 }
 
 .main {
-  padding: 0;
+  padding: 5px;
+  background-color: $paper;
+  border: black solid 1px;
+
+  &.no-paper {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+  }
 }
 
 .content-box {

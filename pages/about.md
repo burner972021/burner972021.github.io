@@ -14,7 +14,7 @@ Now you might be asking, how can I become burner972021?
 
 Burner972021 is nor simply a concept. There is no straightforward way to become burner972021. Burner972021 is beyond the average person's comprehension in terms of burner972021's ephmerality. Burner972021 has no pronouns, because burner972021 is beyond being classified into these banal categories. Burner972021 is just too amazing and awesome and good. IN fact, why the fuck does everyone not just kill themselves already because the mere existence of burner972021 guarantees the fact that they will NEVER surpass the entity known as burner972021. 
 
-<img src='./../assets/images/obama.jpg' style='width:600px'>
+<img src='./../assets/images/obama.jpg' style='width:623px'>
 
 
 That's all you have to know about burner972021. Til next time, plebians.

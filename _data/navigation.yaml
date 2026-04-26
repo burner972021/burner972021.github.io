@@ -14,7 +14,7 @@ sections:
     links:
       - title: "projects"
         url: "/projects/"
-      - title: "blog"
+      - title: "posts"
         url: "/posts/"
       - title: "tests"
         url: "/tests/"
