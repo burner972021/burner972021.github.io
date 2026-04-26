@@ -1,11 +1,14 @@
 ---
 layout: default
-title: burner972021
-author: techieernie
-permalink: CLICKME
+title: ABOUT ME
+permalink: /CLICKME/
 ---
 
-hi! my name is ***** **************. did i mention i love ragebaiting techie ernie? ragebaiting techie ernie is so fun. all i do is ragebait. i tickle, punch, abuse and grape him all day but he never screams and cries. did i mention i have a cat? i love my cat plank every much. but all i do is stretch the cat and abuse it everyday. i wonder how i haven't been reported for abuse. oh, you want to go out? YAYY im down. ohhh there's no free cake and ice cream? nevermind then. all i do is leech of my friends and use them for free food. did i mention i ragebait my cat too? ahh life must be so fun when all I do is ragebait. ernestttttttt. how should i annoy you today? sigh. ok. you just hate me. FUCK FUCK FUCK FUCK FUCK MY LIFE. I HATE AEP I HATE AEP I HATE SEMICONS IM GOING TO GRAPE YOU ERNIE. I'm gonna kms. Sigh. I just slept a bit. Oh sorry for late reply I fell asleep ☠️ I was sleeping in AEP room and of course I'm late for lesson again. Wait, why does ms tee hate me? I wonder what I do every lesson...oh wait I'm just sleeping. whats bigger than a tuna? a threena. HAHAHAHAHAHAHAHAHAHHAHAHAHAHAHA. whats bigger than a threena? ANTENNA hahahahahahah im so humorous this is so funny HAHAHAHAHAHA. 😭😭😭☠️☠️☠️. yeah im going to molest you. ermmm i dont shower. whats the point of showering? dasfjkasjflkjasdlkfjaksldfjk ughhhhhh fml. Please write me a referral. Did I mention I have 500+ linkedin connections? Wow im so cool. oh my days why is there nothing in my fridge? Oh theres beer! i love beer so much lets drinkkkkkkk. day drinking is my passion. oops my mom is ragebait nvm. did i mention i love chicken rice? omg i love my kopitiam so much the chicken rice is so good its all i ever eat. and the chicken chop too! ahh I WANT CAKE BUY ME CAKE CAN YOU BUY MIXUE LUCKIN AND ITEA pleaseeee. But I want to lose weight. did i mention i havent showered in 24 hours? i get so much huzz. larp larp larp larp larp. oh did i mention im a linux user now? oh i love quantum bit flip buzzword buzzword buzzword prof kwek buzzword too! have i ever mentioned interning at astar! I loveeeee my internship! YES! Emmanuel is my goat. i hate everyone better than me. everyone better than me should just kill themselves and die. fuckkkk im so chopped malaysia ruined my skin. I WANT A GIRLFRIEND. LETS HIKE. WHERE? MACRITCHIE AGAIN! Macritchie is the only place I know in Singapore. monkeytyp is so fun. My cut is going so well. all i do is larp. anyway, lets hang?
+Xizhen:  
+Whenever I am not sleeping or showering, I have my socks on. I only own white socks.
 
-yours earnestly,  
-techieernie
+Frank Li:  
+I aliased fastfetch to ff so I can larp 0.2 seconds faster. My sister says it's a neat trick.
+
+burner972021:  
+Tomorrow is a new day and I'll grow older. I want to lose some weight and I don't want to grow old.
