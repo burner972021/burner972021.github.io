@@ -9,10 +9,11 @@ layout: default
   {% for entry in diary_entries %}
   <details class="diary-entry">
     <summary class="diary-entry-header">
-      <span class="diary-entry-title">{{ entry.title }}</span>
-      <p class="diary-entry-preview">{{ entry.content | strip_html | truncatewords: 25 }}</p>
+      <span class="diary-entry-title">{{ entry.title }}<span class="diary-entry-date">{{ entry.date | date: "%B %d, %Y" }}</span></span>
+      <p class="diary-entry-preview">{{ entry.content | strip_html | truncatewords: 20 }}</p>
     </summary>
     <div class="diary-entry-body">
+      <p style="font-weight: bold; line-height: 0;">Dear {{ entry.author }}:</p>
       {{ entry.content }}
     </div>
   </details>
