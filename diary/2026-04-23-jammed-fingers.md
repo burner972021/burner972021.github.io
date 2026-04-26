@@ -1,8 +1,10 @@
 ---
 layout: diaryentry
-title: 'volleyball'
-date: 23 April 2026
+title: my fingers got jammed today
 author: xizhen
 ---
 
-So today i was playing volleyball and when i tried to set the ball to my friend my right ring finger got jammed :( it hurts so bad and its swollen and bruised. I hope it gets better soon because I have a test next week!
+So today i was playing volleyball and when i tried to set the ball to my friend my right ring finger got jammed :( it hurts so bad and its swollen and bruised hmm if only a beautiful girl would come and kiss it better right now hmm hm hmmmm
+
+signing off,
+xizhen

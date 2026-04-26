@@ -27,10 +27,10 @@ body {
 .page-inner {
   display: grid;
   grid-template-columns: minmax(220px, 1fr) minmax(420px, 2fr);
-  align-items: stretch;
   gap: 5px;
   max-width: 960px;
   width: 100%;
+  height: 100%;
 }
 
 .main {
@@ -41,37 +41,6 @@ body {
   background: $box-bg;
   border: 2px solid $box-border;
   padding: 0;
-}
-
-.ext-links {
-  position: relative;
-  bottom: 12px;
-  right: 12px;
-  display: flex;
-  gap: 8px;
-  z-index: 100;
-
-  a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    color: $ink;
-    background: $nav-bg;
-    border: 1px solid $box-border;
-    text-decoration: none;
-    padding: 5px;
-
-    svg {
-      width: 100%;
-      height: 100%;
-    }
-
-    &:hover {
-      background: #eaff06;
-    }
-  }
 }
 
 @media (max-width: 900px) {

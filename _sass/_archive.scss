@@ -26,15 +26,9 @@
 }
 
 .diary-entry-title {
-  display: flex;
-  justify-content: space-between;
+  display: block;
   font-size: 14px;
   font-weight: bold;
-}
-
-.diary-entry-date {
-  font-weight: normal;
-  color: #555;
 }
 
 .diary-entry-preview {

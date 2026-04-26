@@ -25,16 +25,6 @@ description: >-
 baseurl: "" # the subpath of your site, e.g. /blog
 url: 'https://burner972021.github.io'
 
-# External links shown as icons in the bottom-right corner.
-# icon can be: github, email, twitter, instagram, link
-external_links:
-  - title: "GitHub"
-    url: "https://github.com/burner972021"
-    icon: "github"
-  - title: "Email"
-    url: "mailto:burner972021@example.com"
-    icon: "email"
-
 # Build settings
 plugins:
   - jekyll-feed

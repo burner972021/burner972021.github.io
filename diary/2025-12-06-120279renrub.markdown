@@ -1,8 +1,8 @@
 ---
 layout: diaryentry
 title:  "120279renruB"
-date:   06 December 2025
-author: burner972021
+date:   2025-12-06 23:30:28 +0800
+categories: 120279renrub
 ---
 
 To be frank I have little use for a blog. I remember things by the number of letters they have. My favourite author is Kazuo Ishiguro. Life is a performance. I want to write a lot of things, but I don't think I have enough time now. I believe profile blurbs should list trivial facts about yourself that happen to be unique(but not identifying). (I guess I also happen have a lot of things to say)

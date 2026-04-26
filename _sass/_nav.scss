@@ -4,17 +4,14 @@
   padding: 0;
   display: flex;
   justify-content: flex-end;
-  align-items: flex-start;
-  position: sticky;
-  top: 0;
-  height: 100vh;
 }
 
 .nav-panel {
   width: min(220px, 100%);
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  overflow-y: auto;
   background: $nav-bg;
   border: 1px solid $box-border;
   padding: 12px 10px;
@@ -39,21 +36,5 @@
     &:hover {
       opacity: 0.8;
     }
-  }
-}
-
-.nav-spacer {
-  flex: 1;
-}
-
-.nav-clickme {
-  display: block;
-  color: #f2f273;
-  text-decoration: underline;
-  padding: 2px 0;
-  font-size: 14px;
-
-  &:hover {
-    opacity: 0.8;
   }
 }
