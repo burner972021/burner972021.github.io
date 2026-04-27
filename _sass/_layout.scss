@@ -83,8 +83,15 @@ body {
 }
 
 @media (max-width: 900px) {
+  .page {
+    justify-content: flex-start;
+  }
+
   .page-inner {
-    grid-template-columns: 1fr;
+    grid-template-columns: 220px 1fr;
+    max-width: none;
+    width: 100%;
+    gap: 0;
   }
 
   .main {
