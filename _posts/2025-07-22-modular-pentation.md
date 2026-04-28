@@ -4,7 +4,7 @@ title:  "Modular pentation"
 date:   2025-07-23 20:20:54
 categories: Mathematics
 tags: modmath cryptography writeups
-excerpt: On very very big numbers that turn small
+excerpt: "On very very big numbers that turn small"
 mathjax: true
 ---
 

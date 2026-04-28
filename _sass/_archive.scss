@@ -51,3 +51,57 @@
   padding: 10px 12px;
   font-size: 14px;
 }
+
+.post-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-item {
+  display: block;
+  padding: 10px 12px;
+  border: 2px solid $box-border;
+  margin-bottom: -2px;
+  background: $box-bg;
+  text-decoration: none;
+  color: $ink;
+
+  &:hover {
+    background: #fffee8;
+  }
+}
+
+.post-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 14px;
+}
+
+.post-item-title {
+  font-weight: bold;
+}
+
+.post-item-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  flex-shrink: 0;
+  margin-left: 12px;
+}
+
+.post-item-tag {
+  color: #888;
+  font-size: 12px;
+}
+
+.post-item-date {
+  font-size: 13px;
+  color: #555;
+}
+
+.post-item-sub {
+  margin-top: 3px;
+  font-size: 13px;
+  color: #555;
+}

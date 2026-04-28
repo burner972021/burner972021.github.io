@@ -4,6 +4,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{{ page.title }}</title>
+    <script>
+      try {
+        var bd = localStorage.getItem('backdrop');
+        if (bd) {
+          var h = document.documentElement;
+          h.style.backgroundImage = 'url(' + bd + ')';
+          h.style.backgroundRepeat = 'repeat';
+          h.style.backgroundPosition = 'center top';
+        }
+      } catch(e) {}
+    </script>
     <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico" />
     <link rel="stylesheet" href="/assets/css/main.css" />
     <script type="module" src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@8/dist/turbo.es2017-esm.js"></script>
@@ -31,6 +42,21 @@
         </main>
       </div>
     </div>
+
+    <script>
+      if (!localStorage.getItem('backdrop')) {
+        var img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = function() {
+          var c = document.createElement('canvas');
+          c.width = img.naturalWidth;
+          c.height = img.naturalHeight;
+          c.getContext('2d').drawImage(img, 0, 0);
+          try { localStorage.setItem('backdrop', c.toDataURL('image/jpeg', 0.9)); } catch(e) {}
+        };
+        img.src = '/assets/backdrop.jpg';
+      }
+    </script>
 
     {% if site.external_links %}
     <div class="ext-links">
