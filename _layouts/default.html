@@ -37,7 +37,7 @@
             <a class="nav-clickme" style="color:rgb(227, 224, 118)" href="/CLICKME/">CLICKME</a>
           </nav>
         </aside>
-        <main class="main{% if page.layout == 'diary' or page.url == '/' %} no-paper{% endif %}">
+        <main class="main{% if page.layout == 'diary' or page.url == '/' or page.url == '/sketchbook/' %} no-paper{% endif %}">
           {{ content }}
         </main>
       </div>

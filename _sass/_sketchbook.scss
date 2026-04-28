@@ -1,0 +1,81 @@
+@use "variables" as *;
+
+#sketchbook {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.sketch-form {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 12px;
+  border: 2px solid $box-border;
+  background: $box-bg;
+  margin-bottom: 12px;
+
+  input, textarea {
+    font-family: inherit;
+    font-size: 13px;
+    border: 1px solid #bbb;
+    padding: 4px 6px;
+    background: $paper;
+    width: 100%;
+    box-sizing: border-box;
+    resize: vertical;
+
+    &:focus {
+      outline: 1px solid $box-border;
+    }
+  }
+}
+
+.sketch-form-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2px;
+
+  button {
+    font-family: inherit;
+    font-size: 13px;
+    padding: 3px 12px;
+    border: 1px solid $box-border;
+    background: $nav-bg;
+    cursor: pointer;
+
+    &:hover { background: #eaff06; }
+    &:disabled { opacity: 0.5; cursor: default; }
+  }
+}
+
+#sk-status {
+  font-size: 12px;
+  color: #888;
+}
+
+.sketch-note {
+  border: 2px solid $box-border;
+  margin-bottom: -2px;
+  background: $box-bg;
+  padding: 8px 12px;
+}
+
+.sketch-note-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-bottom: 4px;
+
+  span {
+    color: #888;
+    font-size: 12px;
+  }
+}
+
+.sketch-note-body {
+  font-size: 13px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
