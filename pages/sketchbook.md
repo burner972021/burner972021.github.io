@@ -19,9 +19,11 @@ permalink: /sketchbook/
 
   create table doodles (
     id bigint primary key generated always as identity,
+    author text default 'anonymous',
     imgdata text not null,
     created_at timestamptz default now()
   );
+  -- if table already exists: alter table doodles add column author text default 'anonymous';
   alter table doodles enable row level security;
   create policy "read" on doodles for select using (true);
   create policy "insert" on doodles for insert to anon with check (length(imgdata) <= 10000);
@@ -79,7 +81,7 @@ async function skLoadFeed() {
   }
   if (dr.data) {
     dr.data.forEach(function(d) {
-      items.push({ type: 'doodle', imgdata: d.imgdata, created_at: d.created_at });
+      items.push({ type: 'doodle', author: d.author, imgdata: d.imgdata, created_at: d.created_at });
     });
   }
 
@@ -94,7 +96,8 @@ async function skLoadFeed() {
           return '<div class="sketch-note"><div class="sketch-note-header"><strong>' + author + '</strong><span>' + date + '</span></div><div class="sketch-note-body">' + esc(item.content) + '</div></div>';
         }
         const src = item.imgdata.startsWith('data:image/') ? item.imgdata : '';
-        return '<div class="sketch-doodle"><img src="' + src + '" alt="doodle"><div class="sketch-doodle-date">' + date + '</div></div>';
+        const dauthor = item.author ? esc(item.author) : 'anonymous';
+        return '<div class="sketch-doodle"><span class="sketch-doodle-author">' + dauthor + '</span><img src="' + src + '" alt="doodle"><span class="sketch-doodle-date">' + date + '</span></div>';
       }).join('');
 }
 
@@ -121,7 +124,9 @@ async function skPost() {
     tasks.push(db.from('notes').insert({ author, content }));
   }
   if (!isCanvasBlank()) {
-    tasks.push(db.from('doodles').insert({ imgdata: canvas.toDataURL('image/png') }));
+    let doodleAuthor = authorEl.value.trim();
+    if (!doodleAuthor) doodleAuthor = 'anonymous';
+    tasks.push(db.from('doodles').insert({ author: doodleAuthor, imgdata: canvas.toDataURL('image/png') }));
   }
 
   const results = await Promise.all(tasks);
