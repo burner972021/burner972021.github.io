@@ -123,6 +123,7 @@
   border: 2px solid $box-border;
   margin-bottom: -2px;
   background: $box-bg;
+  position: relative;
 
   img {
     display: block;
@@ -134,8 +135,9 @@
 }
 
 .sketch-doodle-date {
-  font-size: 12px;
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  font-size: 11px;
   color: #888;
-  text-align: right;
-  padding: 3px 8px 4px;
 }
