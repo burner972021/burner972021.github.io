@@ -99,6 +99,12 @@ body {
   }
 }
 
+@media (max-width: 640px) {
+  .page-inner {
+    grid-template-columns: 1fr;
+  }
+}
+
 #person-display {
   padding: 0px
 }

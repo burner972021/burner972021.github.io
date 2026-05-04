@@ -23,6 +23,8 @@
     {% endif %}
   </head>
   <body>
+    <button id="nav-toggle" aria-label="open navigation">&#9776;</button>
+    <div id="nav-overlay"></div>
     <div class="page">
       <div class="page-inner">
         <aside class="left">
@@ -44,6 +46,19 @@
     </div>
 
     <script>
+      (function() {
+        var toggle  = document.getElementById('nav-toggle');
+        var left    = document.querySelector('.left');
+        var overlay = document.getElementById('nav-overlay');
+        function openNav()  { left.classList.add('nav-open');    overlay.classList.add('active'); }
+        function closeNav() { left.classList.remove('nav-open'); overlay.classList.remove('active'); }
+        toggle.addEventListener('click', openNav);
+        overlay.addEventListener('click', closeNav);
+        document.querySelector('.nav-panel').addEventListener('click', function(e) {
+          if (e.target.tagName === 'A') closeNav();
+        });
+      })();
+
       if (!localStorage.getItem('backdrop')) {
         var img = new Image();
         img.crossOrigin = 'anonymous';

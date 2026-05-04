@@ -34,7 +34,7 @@ permalink: /sketchbook/
 <script>
 // Replace these two values with your Supabase project URL and anon key
 const SUPABASE_URL  = 'https://ndmqbmjzpdjvfqftlllb.supabase.co';
-const SUPABASE_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5kbXFibWp6cGRqdmZxZnRsbGxiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzczNTE2NzUsImV4cCI6MjA5MjkyNzY3NX0.mHYrUy1rRcRlxx9M038fADE_U-g-dHuNaM1jmVgRVJ4';
+const SUPABASE_KEY  = 'sb_publishable_2_xS4urJYB5HczxgE5HzCg_c5EJymGe';
 
 const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
