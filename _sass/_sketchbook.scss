@@ -55,9 +55,6 @@
   color: #888;
 }
 
-.sketch-notes-footer {
-  margin-bottom: 6px;
-}
 
 .sketch-doodle-toolbar {
   display: flex;
@@ -131,5 +128,14 @@
     display: block;
     width: 100%;
     height: auto;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
   }
+}
+
+.sketch-doodle-date {
+  font-size: 12px;
+  color: #888;
+  text-align: right;
+  padding: 3px 8px 4px;
 }

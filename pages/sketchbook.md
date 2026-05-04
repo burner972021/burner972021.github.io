@@ -31,10 +31,6 @@ permalink: /sketchbook/
   <div class="sketch-form">
     <input id="sk-author" type="text" placeholder="name (optional)" maxlength="30">
     <textarea id="sk-content" placeholder="leave a note..." maxlength="500" rows="4"></textarea>
-    <div class="sketch-form-footer sketch-notes-footer">
-      <span id="sk-status"></span>
-      <button onclick="skSubmit()">post note</button>
-    </div>
     <div class="sketch-doodle-toolbar">
       <button class="sk-color active" data-color="#000000" style="background:#000000" title="black"></button>
       <button class="sk-color" data-color="#ff0000" style="background:#ff0000" title="red"></button>
@@ -43,17 +39,15 @@ permalink: /sketchbook/
     </div>
     <canvas id="sk-canvas" width="64" height="32"></canvas>
     <div class="sketch-form-footer">
-      <span id="sk-doodle-status"></span>
+      <span id="sk-status"></span>
       <div class="sketch-doodle-btns">
         <button onclick="skClearCanvas()">clear</button>
         <button onclick="skUndo()">undo</button>
-        <button onclick="skSubmitDoodle()">post doodle</button>
+        <button onclick="skPost()">post</button>
       </div>
     </div>
   </div>
-
-  <div id="sk-list"></div>
-  <div id="sk-doodle-list"></div>
+  <div id="sk-feed"></div>
 </div>
 
 <script>
@@ -66,44 +60,82 @@ function esc(s) {
   return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
-async function skLoad() {
-  const { data, error } = await db.from('notes').select('*').order('created_at', { ascending: false });
-  if (error) {
-    document.getElementById('sk-list').innerHTML = '<p style="color:#888;font-size:13px;">could not load notes.</p>';
+async function skLoadFeed() {
+  const [nr, dr] = await Promise.all([
+    db.from('notes').select('*'),
+    db.from('doodles').select('*')
+  ]);
+
+  if (nr.error && dr.error) {
+    document.getElementById('sk-feed').innerHTML = '<p style="color:#888;font-size:13px;">could not load posts.</p>';
     return;
   }
-  document.getElementById('sk-list').innerHTML = data.length === 0
-    ? '<p style="color:#888;font-size:13px;">no notes yet.</p>'
-    : data.map(function(n) {
-        const author = n.author ? esc(n.author) : 'anonymous';
-        const date = new Date(n.created_at).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
-        return '<div class="sketch-note"><div class="sketch-note-header"><strong>' + author + '</strong><span>' + date + '</span></div><div class="sketch-note-body">' + esc(n.content) + '</div></div>';
+
+  const items = [];
+  if (nr.data) {
+    nr.data.forEach(function(n) {
+      items.push({ type: 'note', author: n.author, content: n.content, created_at: n.created_at });
+    });
+  }
+  if (dr.data) {
+    dr.data.forEach(function(d) {
+      items.push({ type: 'doodle', imgdata: d.imgdata, created_at: d.created_at });
+    });
+  }
+
+  items.sort(function(a, b) { return new Date(b.created_at) - new Date(a.created_at); });
+
+  document.getElementById('sk-feed').innerHTML = items.length === 0
+    ? '<p style="color:#888;font-size:13px;">nothing here yet.</p>'
+    : items.map(function(item) {
+        const date = new Date(item.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        if (item.type === 'note') {
+          const author = item.author ? esc(item.author) : 'anonymous';
+          return '<div class="sketch-note"><div class="sketch-note-header"><strong>' + author + '</strong><span>' + date + '</span></div><div class="sketch-note-body">' + esc(item.content) + '</div></div>';
+        }
+        const src = item.imgdata.startsWith('data:image/') ? item.imgdata : '';
+        return '<div class="sketch-doodle"><img src="' + src + '" alt="doodle"><div class="sketch-doodle-date">' + date + '</div></div>';
       }).join('');
 }
 
-async function skSubmit() {
+async function skPost() {
   const authorEl  = document.getElementById('sk-author');
   const contentEl = document.getElementById('sk-content');
   const status    = document.getElementById('sk-status');
-  let author = authorEl.value.trim();
-  if (!author) author = 'anonymous';
-  const content = contentEl.value.trim();
-  if (!content) return;
+  const content   = contentEl.value.trim();
+  const hasText   = content.length > 0;
+  const btns      = document.querySelectorAll('.sketch-doodle-btns button');
 
-  const btn = document.querySelector('.sketch-notes-footer button');
-  btn.disabled = true;
+  if (!hasText && isCanvasBlank()) {
+    status.textContent = 'write a note or draw something first.';
+    return;
+  }
+
+  btns.forEach(function(b) { b.disabled = true; });
   status.textContent = '';
 
-  const { error } = await db.from('notes').insert({ author, content });
-  btn.disabled = false;
+  const tasks = [];
+  if (hasText) {
+    let author = authorEl.value.trim();
+    if (!author) author = 'anonymous';
+    tasks.push(db.from('notes').insert({ author, content }));
+  }
+  if (!isCanvasBlank()) {
+    tasks.push(db.from('doodles').insert({ imgdata: canvas.toDataURL('image/png') }));
+  }
 
-  if (error) {
+  const results = await Promise.all(tasks);
+  btns.forEach(function(b) { b.disabled = false; });
+
+  const anyError = results.some(function(r) { return r.error; });
+  if (anyError) {
     status.textContent = 'error — try again.';
   } else {
     authorEl.value  = '';
     contentEl.value = '';
     status.textContent = 'posted!';
-    skLoad();
+    skClearCanvas();
+    skLoadFeed();
   }
 }
 
@@ -115,6 +147,16 @@ let currentColor = '#000000';
 let undoStack    = [];
 let doodling     = false;
 let lastPos      = null;
+
+function isCanvasBlank() {
+  const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+  for (let i = 0; i < data.length; i += 4) {
+    if (data[i]   !== 240) return false;
+    if (data[i+1] !== 239) return false;
+    if (data[i+2] !== 235) return false;
+  }
+  return true;
+}
 
 function initCanvas() {
   ctx.fillStyle = '#f0efeb';
@@ -205,37 +247,5 @@ function skClearCanvas() {
   initCanvas();
 }
 
-async function skSubmitDoodle() {
-  const imgdata = canvas.toDataURL('image/png');
-  const status  = document.getElementById('sk-doodle-status');
-  const btns    = document.querySelectorAll('.sketch-doodle-btns button');
-  btns.forEach(function(b) { b.disabled = true; });
-
-  const { error } = await db.from('doodles').insert({ imgdata });
-  btns.forEach(function(b) { b.disabled = false; });
-
-  if (error) {
-    status.textContent = 'error — try again.';
-  } else {
-    status.textContent = 'posted!';
-    skClearCanvas();
-    skLoadDoodles();
-  }
-}
-
-async function skLoadDoodles() {
-  const { data: rows, error } = await db.from('doodles').select('*').order('created_at', { ascending: false });
-  if (error) {
-    document.getElementById('sk-doodle-list').innerHTML = '<p style="color:#888;font-size:13px;">could not load doodles.</p>';
-    return;
-  }
-  document.getElementById('sk-doodle-list').innerHTML = rows.length === 0
-    ? '<p style="color:#888;font-size:13px;">no doodles yet.</p>'
-    : rows.map(function(d) {
-        const src = d.imgdata.startsWith('data:image/') ? d.imgdata : '';
-        return '<div class="sketch-doodle"><img src="' + src + '" alt="doodle"></div>';
-      }).join('');
-}
-
-Promise.all([skLoad(), skLoadDoodles()]);
+skLoadFeed();
 </script>
