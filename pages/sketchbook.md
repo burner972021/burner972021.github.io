@@ -30,12 +30,11 @@ permalink: /sketchbook/
   <div id="sk-list"></div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script>
 // Replace these two values with your Supabase project URL and anon key
 const SUPABASE_URL  = 'https://ndmqbmjzpdjvfqftlllb.supabase.co';
 const SUPABASE_KEY  = 'sb_publishable_2_xS4urJYB5HczxgE5HzCg_c5EJymGe';
-
+  
 const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 function esc(s) {
@@ -44,7 +43,10 @@ function esc(s) {
 
 async function skLoad() {
   const { data, error } = await db.from('notes').select('*').order('created_at', { ascending: false });
-  if (error) return;
+  if (error) {
+    document.getElementById('sk-list').innerHTML = '<p style="color:#888;font-size:13px;">could not load notes.</p>';
+    return;
+  }
   document.getElementById('sk-list').innerHTML = data.length === 0
     ? '<p style="color:#888;font-size:13px;">no notes yet.</p>'
     : data.map(n => `

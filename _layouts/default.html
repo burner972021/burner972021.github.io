@@ -21,6 +21,9 @@
     {% if page.mathjax %}
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
     {% endif %}
+    {% if page.url == '/sketchbook/' %}
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+    {% endif %}
   </head>
   <body>
     <button id="nav-toggle" aria-label="open navigation">&#9776;</button>
