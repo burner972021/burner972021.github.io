@@ -60,7 +60,8 @@ async function skLoad() {
 }
 
 async function skSubmit() {
-  const author  = document.getElementById('sk-author').value.trim() || 'anonymous';
+  let author = document.getElementById('sk-author').value.trim();
+  if (!author) author = 'anonymous';
   const content = document.getElementById('sk-content').value.trim();
   const status  = document.getElementById('sk-status');
   if (!content) return;
