@@ -21,18 +21,25 @@
     {% if page.mathjax %}
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
     {% endif %}
-    {% if page.url == '/sketchbook/' %}
+    {% if page.url == '/sketchbook/' or page.url == '/CLICKME/' %}
     <meta name="turbo-visit-control" content="reload">
+    {% endif %}
+    {% if page.url == '/sketchbook/' or page.layout == 'posts' %}
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
     {% endif %}
   </head>
   <body>
     <button id="nav-toggle" aria-label="open navigation">&#9776;</button>
+    <button id="search-toggle" aria-label="open search">&#9906;</button>
     <div id="nav-overlay"></div>
     <div class="page">
       <div class="page-inner">
         <aside class="left">
           <nav class="nav-panel">
+            <div class="nav-search">
+              <input type="search" id="nav-search-input" placeholder="enter query..." autocomplete="off" aria-label="search site" />
+              <ul id="nav-search-results" hidden></ul>
+            </div>
             {% for section in site.data.navigation.sections %}
               <h2>{{ section.heading }}</h2>
               {% for link in section.links %}
@@ -43,9 +50,19 @@
             <a class="nav-clickme" style="color:rgb(227, 224, 118)" href="/CLICKME/">CLICKME</a>
           </nav>
         </aside>
-        <main class="main{% if page.layout == 'diary' or page.url == '/' or page.url == '/sketchbook/' %} no-paper{% endif %}">
-          {{ content }}
-        </main>
+        <div class="right-col">
+          {% unless page.url == '/' %}
+          <header class="site-header">
+            <span id="site-date"></span>
+            <span class="site-breadcrumb">
+              <a href="/">~</a>{% assign url_clean = page.url | remove: ".html" %}{% assign crumb_parts = url_clean | split: "/" %}{% assign crumb_path = "" %}{% for part in crumb_parts %}{% unless part == "" or part == "index" %}{% assign crumb_path = crumb_path | append: "/" | append: part %} / <a href="{{ crumb_path }}">{{ part }}</a>{% endunless %}{% endfor %}
+            </span>
+          </header>
+          {% endunless %}
+          <main class="main{% if page.layout == 'diary' or page.url == '/' or page.url == '/sketchbook/' %} no-paper{% endif %}">
+            {{ content }}
+          </main>
+        </div>
       </div>
     </div>
 
@@ -61,6 +78,19 @@
         document.querySelector('.nav-panel').addEventListener('click', function(e) {
           if (e.target.tagName === 'A') closeNav();
         });
+        document.getElementById('search-toggle').addEventListener('click', function () {
+          openNav();
+          var inp = document.getElementById('nav-search-input');
+          if (inp) { inp.focus(); inp.select(); }
+        });
+      })();
+
+      (function() {
+        var d = new Date();
+        var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+        var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+        var el = document.getElementById('site-date');
+        if (el) el.textContent = days[d.getDay()] + ', ' + months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
       })();
 
       if (!localStorage.getItem('backdrop')) {
@@ -75,6 +105,47 @@
         };
         img.src = '/assets/backdrop.jpg';
       }
+    </script>
+
+    <script>
+      (function() {
+        var input = document.getElementById('nav-search-input');
+        var results = document.getElementById('nav-search-results');
+        var data = null;
+
+        function fetchData(cb) {
+          if (data) { cb(data); return; }
+          fetch('/search.json')
+            .then(function(r) { return r.json(); })
+            .then(function(d) { data = d; cb(data); })
+            .catch(function() { data = []; cb(data); });
+        }
+
+        function query(term) {
+          term = term.trim().toLowerCase();
+          if (!term) { results.hidden = true; results.innerHTML = ''; return; }
+          fetchData(function(items) {
+            var matches = items.filter(function(p) {
+              return (p.title && p.title.toLowerCase().includes(term)) ||
+                     (p.excerpt && p.excerpt.toLowerCase().includes(term));
+            }).slice(0, 8);
+            results.innerHTML = matches.length
+              ? matches.map(function(p) {
+                  return '<li><a href="' + p.url + '">' + (p.title || p.url) + '</a></li>';
+                }).join('')
+              : '<li class="no-results">no results</li>';
+            results.hidden = false;
+          });
+        }
+
+        input.addEventListener('input', function() { query(this.value); });
+        input.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape') { results.hidden = true; input.value = ''; }
+        });
+        document.addEventListener('click', function(e) {
+          if (!e.target.closest('.nav-search')) { results.hidden = true; }
+        });
+      })();
     </script>
 
     {% if site.external_links %}

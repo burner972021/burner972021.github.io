@@ -2,13 +2,101 @@
 layout: default
 ---
 
+<!--
+  Supabase setup (run once in SQL Editor):
 
-<!DOCTYPE html>
+  create table ratings (
+    id bigint primary key generated always as identity,
+    post_slug text not null,
+    stars integer not null check (stars between 1 and 5),
+    created_at timestamptz default now()
+  );
+  alter table ratings enable row level security;
+  create policy "read"   on ratings for select using (true);
+  create policy "insert" on ratings for insert to anon with check (stars between 1 and 5);
+-->
 
-<html>
-    <head>
-        <link rel="stylesheet" href="/assets/css/main.css" />
-    </head>
+{{ content }}
 
+{% assign r = page.rating | plus: 0 %}
+<div class="post-rating">
+  <div class="post-rating-row">
+    <span class="post-rating-label">author</span>
+    <span class="post-rating-stars">{% if r > 0 %}{% for i in (1..5) %}{% if i <= r %}★{% else %}☆{% endif %}{% endfor %}{% else %}unrated{% endif %}</span>
+  </div>
+  <div class="post-rating-row">
+    <span class="post-rating-label">viewers</span>
+    <span id="rating-avg" class="post-rating-avg">…</span>
+  </div>
+  <div class="post-rating-row" id="rating-input-row">
+    <span class="post-rating-label">your rating</span>
+    <span class="post-rating-interactive">
+      <button class="rating-star" data-v="1">★</button>
+      <button class="rating-star" data-v="2">★</button>
+      <button class="rating-star" data-v="3">★</button>
+      <button class="rating-star" data-v="4">★</button>
+      <button class="rating-star" data-v="5">★</button>
+    </span>
+    <span id="rating-status" class="post-rating-status"></span>
+  </div>
+</div>
 
-</html>
+<script>
+(function () {
+  var URL  = 'https://ndmqbmjzpdjvfqftlllb.supabase.co';
+  var KEY  = 'sb_publishable_2_xS4urJYB5HczxgE5HzCg_c5EJymGe';
+  var db   = supabase.createClient(URL, KEY);
+  var slug = '{{ page.url }}';
+  var lsKey = 'rated:' + slug;
+
+  var avgEl    = document.getElementById('rating-avg');
+  var statusEl = document.getElementById('rating-status');
+  var stars    = Array.from(document.querySelectorAll('.rating-star'));
+
+  function setHighlight(n) {
+    stars.forEach(function (s) {
+      s.classList.toggle('on', parseInt(s.dataset.v) <= n);
+    });
+  }
+
+  function loadAvg() {
+    db.from('ratings').select('stars').eq('post_slug', slug).then(function (res) {
+      if (res.error || !res.data || res.data.length === 0) {
+        avgEl.textContent = 'no ratings yet';
+      } else {
+        var sum = res.data.reduce(function (a, r) { return a + r.stars; }, 0);
+        avgEl.textContent = (sum / res.data.length).toFixed(1) + ' / 5  (' + res.data.length + ' ' + (res.data.length === 1 ? 'rating' : 'ratings') + ')';
+      }
+    });
+  }
+
+  var myRating = parseInt(localStorage.getItem(lsKey)) || 0;
+  if (myRating) {
+    setHighlight(myRating);
+    statusEl.textContent = 'you rated ' + myRating + ' / 5';
+    stars.forEach(function (s) { s.disabled = true; });
+  } else {
+    stars.forEach(function (btn) {
+      btn.addEventListener('mouseenter', function () { setHighlight(parseInt(this.dataset.v)); });
+      btn.addEventListener('mouseleave', function () { setHighlight(0); });
+      btn.addEventListener('click', function () {
+        var val = parseInt(this.dataset.v);
+        stars.forEach(function (s) { s.disabled = true; });
+        db.from('ratings').insert({ post_slug: slug, stars: val }).then(function (res) {
+          if (res.error) {
+            stars.forEach(function (s) { s.disabled = false; });
+            statusEl.textContent = 'error — try again';
+          } else {
+            localStorage.setItem(lsKey, val);
+            setHighlight(val);
+            statusEl.textContent = 'rated ' + val + ' / 5';
+            loadAvg();
+          }
+        });
+      });
+    });
+  }
+
+  loadAvg();
+})();
+</script>

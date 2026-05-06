@@ -17,6 +17,44 @@ body {
   padding: 5px;
 }
 
+.site-header {
+  background: #00fbff;
+  border-bottom: 2px solid $box-border;
+  padding: 3px 8px;
+  font-size: 13px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+
+  #site-date {
+    flex-shrink: 0;
+    font-weight: bold;
+  }
+
+  .site-breadcrumb {
+    color: $ink;
+    text-align: right;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    a {
+      color: $ink;
+      text-decoration: underline;
+
+      &:hover { opacity: 0.6; }
+    }
+  }
+}
+
+.right-col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
 .page {
   min-height: 100vh;
   display: flex;
