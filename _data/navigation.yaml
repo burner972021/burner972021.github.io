@@ -16,8 +16,8 @@ sections:
         url: "/projects/"
       - title: "posts"
         url: "/posts/"
-      - title: "tests"
-        url: "/tests/"
+      - title: "come again"
+        url: "/come-again/"
   
   - heading: "miscellaneous"
     links:

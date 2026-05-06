@@ -2,20 +2,6 @@
 layout: default
 ---
 
-<!--
-  Supabase setup (run once in SQL Editor):
-
-  create table ratings (
-    id bigint primary key generated always as identity,
-    post_slug text not null,
-    stars integer not null check (stars between 1 and 5),
-    created_at timestamptz default now()
-  );
-  alter table ratings enable row level security;
-  create policy "read"   on ratings for select using (true);
-  create policy "insert" on ratings for insert to anon with check (stars between 1 and 5);
--->
-
 {{ content }}
 
 {% assign r = page.rating | plus: 0 %}
@@ -41,17 +27,36 @@ layout: default
   </div>
 </div>
 
+<!--
+  Add this policy in Supabase SQL Editor to allow rating updates:
+  create policy "update" on ratings for update to anon using (true) with check (stars between 1 and 5);
+-->
 <script>
 (function () {
-  var URL  = 'https://ndmqbmjzpdjvfqftlllb.supabase.co';
-  var KEY  = 'sb_publishable_2_xS4urJYB5HczxgE5HzCg_c5EJymGe';
-  var db   = supabase.createClient(URL, KEY);
-  var slug = '{{ page.url }}';
+  var URL   = 'https://ndmqbmjzpdjvfqftlllb.supabase.co';
+  var KEY   = 'sb_publishable_2_xS4urJYB5HczxgE5HzCg_c5EJymGe';
+  var db    = supabase.createClient(URL, KEY);
+  var slug  = '{{ page.url }}';
   var lsKey = 'rated:' + slug;
 
   var avgEl    = document.getElementById('rating-avg');
   var statusEl = document.getElementById('rating-status');
   var stars    = Array.from(document.querySelectorAll('.rating-star'));
+
+  // stored as JSON {stars, id} or legacy plain int
+  function loadStored() {
+    var raw = localStorage.getItem(lsKey);
+    if (!raw) return null;
+    try {
+      var parsed = JSON.parse(raw);
+      return typeof parsed === 'object' ? parsed : { stars: parsed, id: null };
+    } catch (e) {
+      return { stars: parseInt(raw) || 0, id: null };
+    }
+  }
+
+  var stored   = loadStored();
+  var current  = stored ? stored.stars : 0;
 
   function setHighlight(n) {
     stars.forEach(function (s) {
@@ -70,32 +75,46 @@ layout: default
     });
   }
 
-  var myRating = parseInt(localStorage.getItem(lsKey)) || 0;
-  if (myRating) {
-    setHighlight(myRating);
-    statusEl.textContent = 'you rated ' + myRating + ' / 5';
+  function submitRating(val) {
     stars.forEach(function (s) { s.disabled = true; });
-  } else {
-    stars.forEach(function (btn) {
-      btn.addEventListener('mouseenter', function () { setHighlight(parseInt(this.dataset.v)); });
-      btn.addEventListener('mouseleave', function () { setHighlight(0); });
-      btn.addEventListener('click', function () {
-        var val = parseInt(this.dataset.v);
-        stars.forEach(function (s) { s.disabled = true; });
-        db.from('ratings').insert({ post_slug: slug, stars: val }).then(function (res) {
-          if (res.error) {
-            stars.forEach(function (s) { s.disabled = false; });
-            statusEl.textContent = 'error — try again';
-          } else {
-            localStorage.setItem(lsKey, val);
-            setHighlight(val);
-            statusEl.textContent = 'rated ' + val + ' / 5';
-            loadAvg();
-          }
-        });
-      });
+    statusEl.textContent = '…';
+
+    var req;
+    if (stored && stored.id) {
+      req = db.from('ratings').update({ stars: val }).eq('id', stored.id).select('id');
+    } else {
+      req = db.from('ratings').insert({ post_slug: slug, stars: val }).select('id');
+    }
+
+    req.then(function (res) {
+      stars.forEach(function (s) { s.disabled = false; });
+      if (res.error) {
+        setHighlight(current);
+        statusEl.textContent = 'error — try again';
+      } else {
+        var rowId = res.data && res.data[0] ? res.data[0].id : (stored ? stored.id : null);
+        stored  = { stars: val, id: rowId };
+        current = val;
+        localStorage.setItem(lsKey, JSON.stringify(stored));
+        setHighlight(val);
+        statusEl.textContent = 'rated ' + val + ' / 5';
+        loadAvg();
+      }
     });
   }
+
+  setHighlight(current);
+  if (current) statusEl.textContent = 'you rated ' + current + ' / 5';
+
+  stars.forEach(function (btn) {
+    btn.addEventListener('mouseenter', function () { setHighlight(parseInt(this.dataset.v)); });
+    btn.addEventListener('mouseleave', function () { setHighlight(current); });
+    btn.addEventListener('click', function () {
+      var val = parseInt(this.dataset.v);
+      if (val === current) return;
+      submitRating(val);
+    });
+  });
 
   loadAvg();
 })();

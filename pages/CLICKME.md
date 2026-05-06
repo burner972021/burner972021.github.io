@@ -13,7 +13,8 @@ const people = [
   { name: "burner972021", description: "Tomorrow is a new day and I'll grow older. I want to lose some weight and I don't want to grow old." },
   { name: "Xizhen", description: "I'm hungry." },
   { name: "Frank Li", description: "You always want something from me but today I'm kinda tired. Can't you come back tomorrow instead?" },
-  { name: "burner972021", description: "I use Arch Linux by the way!" }
+  { name: "burner972021", description: "I use Arch Linux by the way!" },
+  { name: "techieernie", description: "you decide"}
 ];
 
 const person = people[Math.floor(Math.random() * people.length)];

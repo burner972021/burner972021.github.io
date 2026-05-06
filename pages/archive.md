@@ -4,6 +4,6 @@ title: archive
 permalink: /archive/
 ---
 
-Coming Soon
+I don't think I have enough posts for an archive yet...
 
 <a href='/'>Return To Home</a>
