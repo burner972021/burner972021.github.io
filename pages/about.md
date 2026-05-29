@@ -4,6 +4,8 @@ title: "Everything is about me"
 permalink: /about/
 ---
 
+Eehhhh, what's going on?
+
 <!-- This is burner972021's blog, where everything revolves around burner972021. (Not that the whole world doesn't revolve around burner972021 usually).
 
 So who is burner972021? Burner972021 is the most goated person I know. Burner972021 is so amazing, I had to make an entire website for burner972021. Burner972021 has no name because burner972021 is too above that sort of thing. To give a normal name to burner972021 would trivialise the existence of the burner972021.

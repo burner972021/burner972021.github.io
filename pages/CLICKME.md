@@ -14,7 +14,8 @@ const people = [
   { name: "Xizhen", description: "I'm hungry." },
   { name: "Frank Li", description: "You always want something from me but today I'm kinda tired. Can't you come back tomorrow instead?" },
   { name: "burner972021", description: "I use Arch Linux by the way!" },
-  { name: "techieernie", description: "you decide"}
+  { name: "Xizhen", description: "Please leave a note at https://burner972021.github.io/sketchbook/!"}
+  { name: "120279renruB", description: "}erehsniarbruoesustelwon{ftcs s'ti .galf eht uoy llet lli"}
 ];
 
 const person = people[Math.floor(Math.random() * people.length)];
