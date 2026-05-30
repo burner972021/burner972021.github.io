@@ -126,8 +126,9 @@
           if (!term) { results.hidden = true; results.innerHTML = ''; return; }
           fetchData(function(items) {
             var matches = items.filter(function(p) {
-              return (p.title && p.title.toLowerCase().includes(term)) ||
-                     (p.excerpt && p.excerpt.toLowerCase().includes(term));
+              var title = (p.title == null ? '' : String(p.title)).toLowerCase();
+              var body = (p.body == null ? '' : String(p.body)).toLowerCase();
+              return title.includes(term) || body.includes(term);
             }).slice(0, 8);
             results.innerHTML = matches.length
               ? matches.map(function(p) {
